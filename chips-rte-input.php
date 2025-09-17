@@ -2,7 +2,7 @@
 /**
  * Plugin Name: CHIPS – Text Input with Format
  * Description: Adds a custom ACF field type (Floating RTE) with a minimal rich-text editor that shows a small tooltip on text selection (bold, italic, link, clear).
- * Version: 0.2.1
+ * Version: 0.2.2
  * Author: CHIPS
  * GitHub Plugin URI: danielshields/chips-wp_rte-input
  * Primary Branch: main
