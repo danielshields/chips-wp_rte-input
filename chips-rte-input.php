@@ -2,7 +2,7 @@
 /**
  * Plugin Name: CHIPS – Text Input with Format
  * Description: Adds a custom ACF field type (Floating RTE) with a minimal rich-text editor that shows a small tooltip on text selection (bold, italic, link, clear).
- * Version: 0.2.2
+ * Version: 0.2.3
  * Author: CHIPS
  * GitHub Plugin URI: danielshields/chips-wp_rte-input
  * Primary Branch: main
@@ -103,7 +103,7 @@ add_action('acf/include_field_types', function() {
                     var input = wrapper.querySelector(".chips-float-rte__input");
                     if (!editable || !input) return;
                     input.value = editable.innerHTML.trim();
-                    editable.classList.toggle("empty", editable.textContent.trim().length === 0 &amp;&amp; input.value.trim().length === 0);
+                    editable.classList.toggle("empty", editable.textContent.trim().length === 0 && input.value.trim().length === 0);
                 }
                 function getSelectionRect(){
                     var sel = window.getSelection();
@@ -111,7 +111,7 @@ add_action('acf/include_field_types', function() {
                     var range = sel.getRangeAt(0).cloneRange();
                     if(range.collapsed) return null;
                     var rect = range.getBoundingClientRect();
-                    if(rect &amp;&amp; rect.width &amp;&amp; rect.height) return rect;
+                    if(rect && rect.width && rect.height) return rect;
                     var span = document.createElement("span");
                     span.appendChild(document.createTextNode("\u200b"));
                     range.insertNode(span);
@@ -142,7 +142,7 @@ add_action('acf/include_field_types', function() {
                     var top  = (rect.top  - wrapperRect.top)  + scrollTop - tooltip.offsetHeight - 8;
 
                     // If not enough room above, place below
-                    if (top &lt; 0) {
+                    if (top < 0) {
                         top = (rect.bottom - wrapperRect.top) + scrollTop + 8;
                     }
 
@@ -187,8 +187,8 @@ add_action('acf/include_field_types', function() {
                         sel.addRange(newRange);
 
                         // Explicitly toggle off bold/italic if active (browsers will split wrappers as needed)
-                        try { if (document.queryCommandState &amp;&amp; document.queryCommandState("bold"))   document.execCommand("bold", false, null); } catch(e) {}
-                        try { if (document.queryCommandState &amp;&amp; document.queryCommandState("italic")) document.execCommand("italic", false, null); } catch(e) {}
+                        try { if (document.queryCommandState && document.queryCommandState("bold"))   document.execCommand("bold", false, null); } catch(e) {}
+                        try { if (document.queryCommandState && document.queryCommandState("italic")) document.execCommand("italic", false, null); } catch(e) {}
 
                         // Remove other inline styles and links around the selected node
                         try { document.execCommand("removeFormat", false, null); } catch(e) {}
@@ -227,9 +227,9 @@ add_action('acf/include_field_types', function() {
 
                     function cacheRange(){
                         var sel = window.getSelection();
-                        if(sel &amp;&amp; sel.rangeCount){
+                        if(sel && sel.rangeCount){
                             var r = sel.getRangeAt(0);
-                            if (editable.contains(r.startContainer) &amp;&amp; editable.contains(r.endContainer)){
+                            if (editable.contains(r.startContainer) && editable.contains(r.endContainer)){
                                 wrapper.__chipsLastRange = r.cloneRange();
                             }
                         }
@@ -294,9 +294,9 @@ add_action('acf/include_field_types', function() {
                     });
                 }
 
-                if(window.acf &amp;&amp; acf.add_action){
-                    acf.add_action("ready", function($el){ init($el &amp;&amp; $el[0] ? $el[0] : document); });
-                    acf.add_action("append", function($el){ init($el &amp;&amp; $el[0] ? $el[0] : document); });
+                if(window.acf && acf.add_action){
+                    acf.add_action("ready", function($el){ init($el && $el[0] ? $el[0] : document); });
+                    acf.add_action("append", function($el){ init($el && $el[0] ? $el[0] : document); });
                 } else {
                     document.addEventListener("DOMContentLoaded", function(){ init(document); });
                 }
